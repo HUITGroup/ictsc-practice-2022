@@ -2,7 +2,7 @@
 
 ICTSC 2022 冬の陣に向けて、HUIT で勉強会を全 3 回に渡り開催しました。（開催予定）
 
-### [第 1 回 Web と Linux 編](lesson1/README.md)
+### [第 1 回 Web と Linux 編](lesson1/)
 
 - キーワード
   - デーモン、nginx、CORS、などなど
