@@ -1,0 +1,49 @@
+---
+- hosts: servers
+  tasks:
+    - name: "apt update && apt upgrade"
+      apt: 
+        update_cache=yes 
+        upgrade=yes
+        chache_valid_time=7200
+      become: yes
+    - name: "install apps"
+      apt: 
+        pkg: 
+          - nginx
+          - apache2
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+          - apt-transport-https
+        state: present
+        update_cache: yes
+        become: yes
+    - name: "stop nginx"
+      systemd: 
+        name: nginx
+        state: stopped
+        become: yes
+    - name: "disable nginx"
+      systemd: 
+        name: nginx
+        state: disabled
+        become: yes
+    - name: "start apache"
+      systemd:
+        name: apache2
+        state: started
+        become: yes
+    - name: "enable apache"
+      systemd:
+        name: apache2
+        state: enabled
+        become: yes
+    - name: "install docker"
+      apt:
+        pkg:
+          - docker-ce
+        state: present
+
+
