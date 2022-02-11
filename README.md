@@ -7,7 +7,7 @@ ICTSC 2022 冬の陣に向けて、HUIT で勉強会を全 3 回に渡り開催�
 - キーワード
   - デーモン、nginx、CORS、などなど
 
-### 第 2 回 openstack と k8s 触ってみる編
+### 第 2 回 OpenStack と k8s 触ってみる編
 
 coming soon...
 
