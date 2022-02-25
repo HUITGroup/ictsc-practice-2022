@@ -1,0 +1,70 @@
+version: "3"
+
+services:
+    s1:
+        build: .
+        container_name: s1
+        hostname: s1
+        tty: true
+        privileged: true
+        stdin_open: true
+        network_mode: none
+        tmpfs:
+            - /tmp
+            - /run
+            - /run/lock
+        volumes:
+            - /sys/fs/cgroup:/sys/fs/cgroup:ro
+        sysctls:
+            - net.ipv6.conf.all.disable_ipv6=1
+    s2:
+        image: queeno/ubuntu-desktop
+        container_name: s2
+        hostname: s2
+        tty: true
+        privileged: true
+        stdin_open: true
+        ports:
+            - 5901:5901
+    r1:
+        image: takapiro99/vyos1.3:latest
+        hostname: r1
+        container_name: r1
+        volumes:
+            - /lib/modules:/lib/modules
+            - /sys/fs/cgroup:/sys/fs/cgroup:ro
+        sysctls:
+            - net.ipv6.conf.all.disable_ipv6=0
+        command: /sbin/init
+        tty: true
+        stdin_open: true
+        privileged: true
+        network_mode: none
+    r2:
+        image: takapiro99/vyos1.3:latest
+        hostname: r2
+        container_name: r2
+        volumes:
+            - /lib/modules:/lib/modules
+            - /sys/fs/cgroup:/sys/fs/cgroup:ro
+        sysctls:
+            - net.ipv6.conf.all.disable_ipv6=0
+        command: /sbin/init
+        tty: true
+        stdin_open: true
+        privileged: true
+        network_mode: none
+    r3:
+        image: takapiro99/vyos1.3:latest
+        hostname: r3
+        container_name: r3
+        volumes:
+            - /lib/modules:/lib/modules
+            - /sys/fs/cgroup:/sys/fs/cgroup:ro
+        sysctls:
+            - net.ipv6.conf.all.disable_ipv6=0
+        command: /sbin/init
+        tty: true
+        stdin_open: true
+        privileged: true
+        network_mode: none

@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+    s1:
+        build: .
+        container_name: s1
+        hostname: s1
+        tmpfs:
+            - /tmp
+            - /run
+            - /run/lock
+        volumes:
+            - /sys/fs/cgroup:/sys/fs/cgroup:ro
+        tty: true
+        privileged: true
+        stdin_open: true
+        network_mode: none
+        sysctls:
+            - net.ipv6.conf.all.disable_ipv6=1
+    s2:
+        build: .
+        container_name: s2
+        hostname: s2
+        tmpfs:
+            - /tmp
+            - /run
+            - /run/lock
+        volumes:
+            - /sys/fs/cgroup:/sys/fs/cgroup:ro
+        tty: true
+        privileged: true
+        stdin_open: true
+        network_mode: none
+        sysctls:
+            - net.ipv6.conf.all.disable_ipv6=1
+    r1:
+        image: takapiro99/vyos1.3:latest
+        hostname: r1
+        container_name: r1
+        volumes:
+            - /lib/modules:/lib/modules
+            - /sys/fs/cgroup:/sys/fs/cgroup:ro
+        sysctls:
+            - net.ipv6.conf.all.disable_ipv6=0
+        command: /sbin/init
+        tty: true
+        stdin_open: true
+        privileged: true
+        network_mode: none
+        # restart: always
+        ports:
+            - 3000:3000
+            - 8000:8000
+            - 80:80
+            - 179:179
